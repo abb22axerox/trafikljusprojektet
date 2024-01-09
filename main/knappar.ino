@@ -1,3 +1,11 @@
+//# INPUT #​
+//En byte som antingen är av/på​
+//För varje knapp
+
+//# OUTPUT #​
+//Btn: 1 till 4​
+//Walk: true/false
+
 void setup() {
   // put your setup code here, to run once:
 

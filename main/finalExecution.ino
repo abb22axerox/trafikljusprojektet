@@ -1,3 +1,10 @@
+//# INPUT #​
+//WaitingLights
+
+//# OUTPUT #​
+//Data till trafikljusen​
+//Antingen​
+//Grön eller röd
 void setup() {
   // put your setup code here, to run once:
 

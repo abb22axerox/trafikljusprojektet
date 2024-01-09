@@ -1,3 +1,9 @@
+//# INPUT #​
+//Light_instructions: Array
+
+//# OUTPUT #​
+//WaitingLights: Lista med listor i
+
 void setup() {
   // put your setup code here, to run once:
 
