@@ -1,10 +1,11 @@
+// Viggo
+
 //# INPUT #​
-//En byte som antingen är av/på​
-//För varje knapp
+// ButtonStates: list, skrivas på formen ButtonStates = [boolean, boolean, ...]
 
 //# OUTPUT #​
-//Btn: 1 till 4​
-//Walk: true/false
+//Btn: int, in range 1-4
+//Walk: boolean
 
 void setup() {
   // put your setup code here, to run once:

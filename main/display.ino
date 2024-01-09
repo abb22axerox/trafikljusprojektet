@@ -1,9 +1,12 @@
+// Axel
+
 //# INPUT #​
-//Namn på traffikljusen från Setup
+// Btn: int, in range 1-4
+// Walk: boolean
+// Turn: int,  in range 0-2
 
 //# OUTPUT #​
-//C_Traffic: lista med trafikljusensnamn för bilar​
-//G_Traffic: -||- för fotgängare
+// ingen, visar pil och stationsnummer på skärmen
 
 void setup() {
   // put your setup code here, to run once:

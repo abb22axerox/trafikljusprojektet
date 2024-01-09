@@ -1,12 +1,12 @@
+// Daniel
+
 //# INPUT #​
-//Ett heltal imellan 1-4 
+// none
 
 //# OUTPUT #​
-//Lista av Respektive justeringar:​
-//  1: [2,4,3],​
-//  2: [4,3,1],​
-//  3: [1,2,4],​
-//  4: [3,1,2]
+// TurnAdjuster: lista, på formen TurnAdjuster = [[2,4,3], [4,3,1], [1,2,4], [3,1,2]]
+
+// OBS! Index är en under stationsnummer
 
 void setup() {
   // put your setup code here, to run once:

@@ -1,8 +1,10 @@
+// Andreas
+
 //# INPUT #​
-//Ett värde mellan 0-1023
+// TurnValue: int , in range 0-1023
 
 //# OUTPUT #​
-//Turn: 0 eller 1 eller 2
+// Turn: int,  in range 0-2
 
 void setup() {
   // put your setup code here, to run once:

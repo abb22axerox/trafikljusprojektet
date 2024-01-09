@@ -1,16 +1,17 @@
+// Viggo
+
 //# INPUT #​
-//WaitingLights
+// funktion LightState(state:bool, index:int)
+// index är mellan 0-7 vilket innebär att om index är över 3 så är det gångtrafikljus
+// WaitingLights: listor med Light_instructions listor exempelvis WaitingLights = [[[2,4],[0]​],...]
 
 //# OUTPUT #​
-//Data till trafikljusen​
-//Antingen​
-//Grön eller röd
+// ingen output, ändrar via parametrar i LightState()
 void setup() {
   // put your setup code here, to run once:
-
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // Kör så att den senaste listan i listan blir utvald genom index 0, alltså den som "väntat" längst
 
 }
