@@ -113,7 +113,6 @@ void light_state(bool state, int t_light) {
   }
 }
 
-
 void updateState(LightStates LState, int red_pin, int yellow_pin, int green_pin) {
   switch (LState) {
     case Red:
