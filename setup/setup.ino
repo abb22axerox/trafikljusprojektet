@@ -82,7 +82,7 @@ void loop() {
 
 }
 
-void light_state(bool state, int t_light) {
+void LightState(bool state, int t_light) {
   if (state) {
     switch (t_light) {
       case 1:
