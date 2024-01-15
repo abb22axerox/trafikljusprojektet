@@ -1,8 +1,10 @@
 //# INPUT #​
-//Ett värde mellan 0-1023
+//Arduino pins och bytedata
 
 //# OUTPUT #​
-//Turn: 0 eller 1 eller 2
+//[]
+//Funktioner för att stänga av/på​
+//Namn på knappar
 
 void setup() {
   // put your setup code here, to run once:

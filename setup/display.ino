@@ -1,8 +1,12 @@
+// Axel
+
 //# INPUT #​
-//Light_instructions: Array
+// Btn: int, in range 1-4
+// Walk: boolean
+// Turn: int,  in range 0-2
 
 //# OUTPUT #​
-//WaitingLights: Lista med listor i
+// ingen, visar pil och stationsnummer på skärmen
 
 void setup() {
   // put your setup code here, to run once:

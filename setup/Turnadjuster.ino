@@ -1,10 +1,12 @@
+// Daniel
+
 //# INPUT #​
-//Arduino pins och bytedata
+// none
 
 //# OUTPUT #​
-//Namn på trafikljus​
-//Funktioner för att stänga av/på​
-//Namn på knappar
+// TurnAdjuster: lista, på formen TurnAdjuster = [[2,4,3], [4,3,1], [1,2,4], [3,1,2]]
+
+// OBS! Index är en under stationsnummer
 
 void setup() {
   // put your setup code here, to run once:

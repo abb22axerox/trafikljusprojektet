@@ -1,10 +1,11 @@
+// Andreas
+
 //# INPUT #​
-//WaitingLights
+// TurnValue: int , in range 0-1023
 
 //# OUTPUT #​
-//Data till trafikljusen​
-//Antingen​
-//Grön eller röd
+// Turn: int,  in range 0-2
+
 void setup() {
   // put your setup code here, to run once:
 
