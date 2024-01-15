@@ -5,7 +5,7 @@
 
 bool ButtonStates[] = {true, false, false, false, true}; // testkod d.v.s station 1 och en fotgängare
 //# OUTPUT #​
-//Btn: int, in range 1-4
+//Btn: int, in range 0-3
 //Walk: boolean
 int Btn;
 boolean Walk;
@@ -16,7 +16,6 @@ void knappar() {
   for (int i = 0; i < StatesLength - 1; i++) {
     if (ButtonStates[i]) {
       Btn = i;
-      Btn = Btn + 1;
     }
   }
 }
