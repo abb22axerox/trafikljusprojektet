@@ -1,3 +1,4 @@
+#include "variables.h"
 // Viggo
 
 //# INPUT #​
@@ -7,12 +8,10 @@ bool ButtonStates[] = {true, false, false, false, true}; // testkod d.v.s statio
 //# OUTPUT #​
 //Btn: int, in range 0-3
 //Walk: boolean
-int Btn;
-boolean Walk;
 
 void knappar() {
-  int StatesLength = 5;
-  Walk = ButtonStates[StatesLength - 1];
+  int StatesLength = 5; // Längden av ButtonStates
+  Walk = ButtonStates[StatesLength - 1]; // Walk är längden-1 vilket ger det sista elementet alltså index 4
   for (int i = 0; i < StatesLength - 1; i++) {
     if (ButtonStates[i]) {
       Btn = i;
