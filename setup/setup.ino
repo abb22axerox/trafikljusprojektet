@@ -5,6 +5,8 @@
 //Funktioner för att stänga av/på​
 //Namn på knappar
 
+#include "variables.h"
+
 typedef enum {
   Red,
   RedYellow,
