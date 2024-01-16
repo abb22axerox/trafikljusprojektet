@@ -9,5 +9,15 @@ int Light_instructions[] = [2, 4];
 int WaitingLights[] = [[7,2]]
 
 void trafikljusOrdnare() {
+  
+}
+
+void setup() {
+  // put your setup code here, to run once:
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
 
 }
