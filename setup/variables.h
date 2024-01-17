@@ -7,7 +7,7 @@ void knappar();
 int Turn;
 bool ButtonStates[];
 void LightState();
-int TurnAdjuster[];
+extern int TurnAdjuster[][3];
 int Light_instructions[];
 int WaitingLights[];
 #endif // VARIABLES_H

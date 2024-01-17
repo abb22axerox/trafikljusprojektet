@@ -15,12 +15,11 @@ using namespace std;
 
 void Traffic_System() {
     if (Walk == true) {
-        Light_instructions[0] = Btn + 3;
+        addToQue(Btn + 3, -1); // -1 inget andra värde
         cout << "Walk: Light_instructions sent if:0" << endl;
     } else {
         if (Turn >= 0 && Turn <= 2) {
-            Light_instructions[0] = Btn;
-            Light_instructions[1] = TurnAdjuster[Btn][Turn];  // Justera för att Btn är inom intervallet 1-4
+            addToQue(Btn, TurnAdjuster[Btn][Turn]);// ..(,-) Justera för att Btn är inom intervallet 1-4
             cout << "Car: Light_instructions sent id:" << Btn << endl;
         } else {
             cout << "Insufficient turn" << endl;
