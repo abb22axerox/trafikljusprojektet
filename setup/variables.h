@@ -4,6 +4,7 @@
 int Btn;
 bool Walk;
 void knappar();
+void finalExecution_loop();
 int Turn;
 bool ButtonStates[];
 void LightState();
