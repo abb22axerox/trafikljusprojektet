@@ -14,7 +14,6 @@ typedef enum {
   Yellow
 } LightStates;
 
-
 LightStates LState;
 
 //Trafficlights
@@ -32,10 +31,10 @@ byte green_led_3 = 9;
 
 byte red_led_4 = 10;
 byte yellow_led_4 = 11;
-byte green_led_4 = 12;
+byte green_led_4 = 38; //fixa detta till 14
 
 byte red_led_5 = 13;
-byte yellow_led_5 = 14;
+byte yellow_led_5 = 39; //fixa detta till 14
 byte green_led_5 = 15;
 
 byte red_led_6 = 16;
@@ -61,8 +60,6 @@ bool button_state_1;
 bool button_state_2;
 bool button_state_3;
 bool button_state_4;
-
-bool ButtonStates[] = { false, false, false, false, false };
 
 unsigned long previousMillis = 0;
 

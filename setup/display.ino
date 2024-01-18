@@ -1,5 +1,4 @@
 #include "variables.h"
-
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -12,11 +11,9 @@
 #define OLED_RESET 4  // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-int Btn = 0;  // Du kan ändra detta till det aktuella stationsnumret
 int input_direction;
 
 void display_setup() {
-  Serial.begin(9600);
   // pinMode(InputPin, INPUT);
   pinMode(LED_BUILTIN, OUTPUT);
   Wire.pins(14, 12);

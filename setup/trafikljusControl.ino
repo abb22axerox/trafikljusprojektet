@@ -1,6 +1,6 @@
 // Daniel
 
-#include <iostream>
+// #include <iostream>
 #include "variables.h"
 
 using namespace std;
@@ -18,14 +18,14 @@ void Traffic_System(int* first, int* second) {
     if (Walk) {
         *first = Btn + 3;
         *second = -1;
-        cout << "Walk: Light_instructions sent if:0" << endl;
+//        cout << "Walk: Light_instructions sent if:0" << endl;
     } else {
         if (Turn >= 0 && Turn <= 2) {
             *first = Btn;
             *second = TurnAdjuster[Btn][Turn]; // Justera för att Btn är inom intervallet 1-4
-            cout << "Car: Light_instructions sent id:" << Btn << endl;
+            // cout << "Car: Light_instructions sent id:" << Btn << endl;
         } else {
-            cout << "Insufficient turn" << endl;
+            // cout << "Insufficient turn" << endl;
         }
     }
 }
