@@ -1,5 +1,5 @@
 // Andreas
-
+#include "variables.h"
 //# INPUT #​
 // TurnValue: int , i intervallet 0-1023
 
@@ -8,16 +8,9 @@
 //# OUTPUT #​
 // Turn: int, i intervallet 0-2
 
-void setup() {
-  // sätt upp din kod här, körs en gång:
-  Serial.begin(9600); // Starta seriell kommunikation
-}
-
-void loop() {
+void pot_loop() {
   // huvudkod som körs upprepade gånger:
   int TurnValue = analogRead(A0); // Läs in värdet från den analoga pin A0
-
-  int Turn; // Output-variabel
 
   // Logik för att kartlägga värdena
   if (TurnValue < 350) {
@@ -28,11 +21,11 @@ void loop() {
     Turn = 2;
   }
 
-  // Skriv ut resultatet till den seriella monitorn
-  Serial.print("TurnValue: ");
-  Serial.print(TurnValue);
-  Serial.print(" - Turn: ");
-  Serial.println(Turn);
+  // // Skriv ut resultatet till den seriella monitorn
+  // Serial.print("TurnValue: ");
+  // Serial.print(TurnValue);
+  // Serial.print(" - Turn: ");
+  // Serial.println(Turn);
 
-  delay(1000); // Valfri fördröjning för att sänka frekvensen av utskrifterna, justera vid behov
+  // delay(1000); // Valfri fördröjning för att sänka frekvensen av utskrifterna, justera vid behov
 }

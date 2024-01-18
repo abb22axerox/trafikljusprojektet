@@ -10,4 +10,5 @@ void LightState();
 extern int TurnAdjuster[][3];
 int Light_instructions[];
 int WaitingLights[];
+void pot_loop();
 #endif // VARIABLES_H
