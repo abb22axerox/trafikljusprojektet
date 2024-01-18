@@ -31,10 +31,10 @@ byte green_led_3 = 9;
 
 byte red_led_4 = 10;
 byte yellow_led_4 = 11;
-byte green_led_4 = 38; //fixa detta till 14
+byte green_led_4 = 12;
 
 byte red_led_5 = 13;
-byte yellow_led_5 = 39; //fixa detta till 14
+byte yellow_led_5 = 14;
 byte green_led_5 = 15;
 
 byte red_led_6 = 16;
@@ -103,6 +103,8 @@ void setup() {
   pinMode(button_pin_4, INPUT);
 
   pinMode(LED_BUILTIN, OUTPUT);
+
+  display_setup();
 }
 
 void loop() {
@@ -122,6 +124,14 @@ void loop() {
   if (button_state_0 || button_state_1 || button_state_2 || button_state_3 || button_state_4) {
     digitalWrite(LED_BUILTIN, HIGH);
   }
+
+  knappar();
+  pot_loop();
+  int first, second;
+  Traffic_System(&first, &second);
+  addToQue(first, second);
+  display_loop();
+  finalExecution_loop();
 }
 
 void LightState(int t_light) {

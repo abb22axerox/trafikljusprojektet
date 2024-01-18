@@ -14,8 +14,6 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 int input_direction;
 
 void display_setup() {
-  // pinMode(InputPin, INPUT);
-  pinMode(LED_BUILTIN, OUTPUT);
   Wire.pins(14, 12);
 
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
