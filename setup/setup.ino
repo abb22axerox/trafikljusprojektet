@@ -127,34 +127,32 @@ void loop() {
   }
 }
 
-void LightState(bool state, int t_light) {
-  if (state) {
-    switch (t_light) {
-      case 0:
-        updateState(LState, red_led_1, yellow_led_1, green_led_1, previousMillis);
-        break;
-      case 1:
-        updateState(LState, red_led_2, yellow_led_2, green_led_2, previousMillis);
-        break;
-      case 2:
-        updateState(LState, red_led_3, yellow_led_3, green_led_3, previousMillis);
-        break;
-      case 3:
-        updateState(LState, red_led_4, yellow_led_4, green_led_4, previousMillis);
-        break;
-      case 4:
-        updateState(LState, red_led_5, yellow_led_5, green_led_5, previousMillis);
-        break;
-      case 5:
-        updateState(LState, red_led_6, yellow_led_6, green_led_6, previousMillis);
-        break;
-      case 6:
-        updateState(LState, red_led_7, yellow_led_7, green_led_7, previousMillis);
-        break;
-      case 7:
-        updateState(LState, red_led_8, yellow_led_8, green_led_8, previousMillis);
-        break;
-    }
+void LightState(int t_light) {
+  switch (t_light) {
+    case 0:
+      updateState(LState, red_led_1, yellow_led_1, green_led_1, previousMillis);
+      break;
+    case 1:
+      updateState(LState, red_led_2, yellow_led_2, green_led_2, previousMillis);
+      break;
+    case 2:
+      updateState(LState, red_led_3, yellow_led_3, green_led_3, previousMillis);
+      break;
+    case 3:
+      updateState(LState, red_led_4, yellow_led_4, green_led_4, previousMillis);
+      break;
+    case 4:
+      updateState(LState, red_led_5, yellow_led_5, green_led_5, previousMillis);
+      break;
+    case 5:
+      updateState(LState, red_led_6, yellow_led_6, green_led_6, previousMillis);
+      break;
+    case 6:
+      updateState(LState, red_led_7, yellow_led_7, green_led_7, previousMillis);
+      break;
+    case 7:
+      updateState(LState, red_led_8, yellow_led_8, green_led_8, previousMillis);
+      break;
   }
 }
 

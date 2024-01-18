@@ -10,4 +10,6 @@ void LightState();
 int TurnAdjuster[];
 int Light_instructions[];
 int WaitingLights[];
+void display_setup();
+void display_loop();
 #endif // VARIABLES_H

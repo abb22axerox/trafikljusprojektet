@@ -1,13 +1,3 @@
-// Axel
-
-//# INPUT #​
-// Btn: int, in range 1-4
-// Walk: boolean
-// Turn: int,  in range 0-2
-
-//# OUTPUT #​
-// ingen, visar pil och stationsnummer på skärmen
-
 #include "variables.h"
 
 #include <SPI.h>
@@ -22,12 +12,12 @@
 #define OLED_RESET 4  // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-#define InputPin 30
-// bool ButtonState;
+int Btn = 0;  // Du kan ändra detta till det aktuella stationsnumret
+int input_direction;
 
-void setup() {
+void display_setup() {
   Serial.begin(9600);
-  pinMode(InputPin, INPUT);
+  // pinMode(InputPin, INPUT);
   pinMode(LED_BUILTIN, OUTPUT);
   Wire.pins(14, 12);
 
@@ -36,36 +26,63 @@ void setup() {
   display.clearDisplay();
 
   display.setTextColor(WHITE);
-  display.setTextSize(2, 3);
+
+  // Loading fish
+  display.setTextSize(1);
+  display.setCursor(5, 40);
+  display.println(F("Waiting for input..."));
+
+  // Display station number in the upper left corner
+  display.setTextSize(1);
+  display.setCursor(0, 0);
+  display.print(F("Station: "));
+  display.print(Btn);
+
+  display.display();
 }
 
-void loop() {
-  ButtonState = digitalRead(InputPin);
-  digitalWrite(LED_BUILTIN, ButtonState);
+void update_station() {
+  display.setTextSize(1);
+  display.setCursor(0, 0);
+  display.print(F("Station: "));
+  display.print(Btn);
+}
 
-  if (ButtonState) {
+void update_direction(int text_size_x, int text_size_y, int cursor_x, int cursor_y, String direction) {
+  // Temp sensor code goes here
+  display.setTextSize(text_size_x, text_size_y);
+  display.setCursor(cursor_x, cursor_y);
+  display.println(direction);
+}
+
+void display_loop() {
+  Serial.println("Which sensor would you like to read? ");
+
+  while (Serial.available() == 0) {
+  }
+
+  input_direction = Turn + 1;
+
+  int input_int = Serial.parseInt();
+  if (input_int != 0 && input_int != input_direction) {
+    input_direction = input_int;
     display.clearDisplay();
-    display.setCursor(10, 20);
-    display.println(F("Grattis!"));
 
-    for (int16_t i = 0; i < display.height() / 2 - 2; i += 40) {
-      display.drawRoundRect(i, i, display.width() - 2 * i, display.height() - 2 * i,
-                            display.height() / 4, SSD1306_WHITE);
-      display.display();
-      delay(1);
-    }
-  } 
-  else {
-    display.clearDisplay();
-    display.setCursor(0, 10);
-    display.println(F("Tryck nu!"));
+    update_station();
 
-    for (int16_t i = 0; i < display.height() / 2 - 2; i += 40) {
-      display.drawRoundRect(i, i, display.width() - 2 * i, display.height() - 2 * i,
-                            display.height() / 4, SSD1306_WHITE);
-      display.display();
-      delay(1);
+    switch (input_direction) {
+      case 2:
+        update_direction(6, 7, 50, 30, "^");
+        break;
+
+      case 3:
+        update_direction(5, 5, 50, 20, ">");
+        break;
+
+      case 1:
+        update_direction(5, 5, 50, 20, "<");
+        break;
     }
-    delay(200);
+    display.display();
   }
 }
