@@ -2,9 +2,7 @@
 // Viggo
 
 //# INPUT #​
-// ButtonStates: list, skrivas på formen ButtonStates = [boolean, boolean, ...]
-
-bool ButtonStates[] = {true, false, false, false, true}; // testkod d.v.s station 1 och en fotgängare
+// bool ButtonStates[] = {true, false, false, false, true}; // testkod d.v.s station 1 och en fotgängare
 //# OUTPUT #​
 //Btn: int, in range 0-3
 //Walk: boolean
