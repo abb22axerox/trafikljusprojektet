@@ -4,12 +4,15 @@
 int Btn;
 bool Walk;
 void knappar();
+void finalExecution_loop();
 int Turn;
 bool ButtonStates[];
 void LightState();
 int TurnAdjuster[];
-int Light_instructions[];
-int WaitingLights[];
 void display_setup();
 void display_loop();
+int waitingLightsLength = 0;
+int** WaitingLights = nullptr;
+void addToQue();
+int* getLongestWaiter();
 #endif // VARIABLES_H
