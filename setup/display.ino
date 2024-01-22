@@ -11,10 +11,10 @@
 #define OLED_RESET 4  // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-int input_direction;
+// int input_direction;
 
 void display_setup() {
-  Wire.pins(14, 12);
+  Wire.begin();
 
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
@@ -44,40 +44,30 @@ void update_station() {
 }
 
 void update_direction(int text_size_x, int text_size_y, int cursor_x, int cursor_y, String direction) {
-  // Temp sensor code goes here
+  delay(1);
   display.setTextSize(text_size_x, text_size_y);
   display.setCursor(cursor_x, cursor_y);
   display.println(direction);
 }
 
 void display_loop() {
-  Serial.println("Which sensor would you like to read? ");
+  display.clearDisplay();
 
-  while (Serial.available() == 0) {
+  update_station();
+
+  switch (Turn) {
+    case 0:
+      update_direction(5, 5, 50, 20, "<");
+      break;
+    case 1:
+      update_direction(6, 7, 50, 30, "^");
+      break;
+    case 2:
+      update_direction(5, 5, 50, 20, ">");
+      break;
+    default:
+      Serial.println("Def");
+      break;
   }
-
-  input_direction = Turn + 1;
-
-  int input_int = Serial.parseInt();
-  if (input_int != 0 && input_int != input_direction) {
-    input_direction = input_int;
-    display.clearDisplay();
-
-    update_station();
-
-    switch (input_direction) {
-      case 2:
-        update_direction(6, 7, 50, 30, "^");
-        break;
-
-      case 3:
-        update_direction(5, 5, 50, 20, ">");
-        break;
-
-      case 1:
-        update_direction(5, 5, 50, 20, "<");
-        break;
-    }
-    display.display();
-  }
+  display.display();
 }

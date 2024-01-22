@@ -18,7 +18,6 @@
 // }
 //--------------------------------
 void finalExecution_loop() {
-  delay(5000);
   int* LightsToActivate;
   
   LightsToActivate = getLongestWaiter();

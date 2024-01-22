@@ -7,20 +7,22 @@
 
 //# OUTPUT #​
 // Turn: int, i intervallet 0-2
+int TurnValue;
 
 void pot_loop() {
   // huvudkod som körs upprepade gånger:
-  int TurnValue = analogRead(A0); // Läs in värdet från den analoga pin A0
-
+  TurnValue = analogRead(A0); // Läs in värdet från den analoga pin A0
+  
   // Logik för att kartlägga värdena
   if (TurnValue < 350) {
     Turn = 0;
-  } else if (TurnValue >= 350 && TurnValue < 650) {
+  } 
+  else if (TurnValue > 350 && TurnValue < 650) {
     Turn = 1;
-  } else {
+  } 
+  else {
     Turn = 2;
   }
-
   // // Skriv ut resultatet till den seriella monitorn
   // Serial.print("TurnValue: ");
   // Serial.print(TurnValue);

@@ -17,43 +17,43 @@ typedef enum {
 LightStates LState;
 
 //Trafficlights
-byte red_led_1 = 1;
-byte yellow_led_1 = 2;
-byte green_led_1 = 3;
+byte red_led_1 = 22;
+byte yellow_led_1 = 23;
+byte green_led_1 = 24;
 
-byte red_led_2 = 4;
-byte yellow_led_2 = 5;
-byte green_led_2 = 6;
+byte red_led_2 = 25;
+byte yellow_led_2 = 26;
+byte green_led_2 = 27;
 
-byte red_led_3 = 7;
-byte yellow_led_3 = 7;
-byte green_led_3 = 9;
+byte red_led_3 = 28;
+byte yellow_led_3 = 29;
+byte green_led_3 = 30;
 
-byte red_led_4 = 10;
-byte yellow_led_4 = 11;
-byte green_led_4 = 12;
+byte red_led_4 = 31;
+byte yellow_led_4 = 32;
+byte green_led_4 = 33;
 
-byte red_led_5 = 13;
-byte yellow_led_5 = 14;
-byte green_led_5 = 15;
+byte red_led_5 = 34;
+byte yellow_led_5 = 35;
+byte green_led_5 = 36;
 
-byte red_led_6 = 16;
-byte yellow_led_6 = 17;
-byte green_led_6 = 18;
+byte red_led_6 = 37;
+byte yellow_led_6 = 38;
+byte green_led_6 = 39;
 
-byte red_led_7 = 19;
-byte yellow_led_7 = 20;
-byte green_led_7 = 21;
+byte red_led_7 = 40;
+byte yellow_led_7 = 41;
+byte green_led_7 = 42;
 
-byte red_led_8 = 22;
-byte yellow_led_8 = 23;
-byte green_led_8 = 24;
+byte red_led_8 = 43;
+byte yellow_led_8 = 44;
+byte green_led_8 = 45;
 
-#define button_pin_0 25
-#define button_pin_1 26
-#define button_pin_2 27
-#define button_pin_3 28
-#define button_pin_4 29
+#define button_pin_0 46
+#define button_pin_1 47
+#define button_pin_2 48
+#define button_pin_3 49
+#define button_pin_4 50
 
 bool button_state_0;
 bool button_state_1;
@@ -125,13 +125,13 @@ void loop() {
     digitalWrite(LED_BUILTIN, HIGH);
   }
 
-  knappar();
+  knappar_loop();
   pot_loop();
-  int first, second;
-  Traffic_System(&first, &second);
-  addToQue(first, second);
+  // int first, second;
+  // Traffic_System(&first, &second);
+  // addToQue(first, second);
   display_loop();
-  finalExecution_loop();
+  // finalExecution_loop();
 }
 
 void LightState(int t_light) {
