@@ -1,12 +1,11 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-int Btn;
+int Btn = 0;
 bool Walk;
 void knappar_loop();
 void finalExecution_loop();
 int Turn;
-bool* ButtonStates;
 void LightState();
 void display_setup();
 void display_loop();
@@ -17,4 +16,9 @@ int* getLongestWaiter();
 extern int TurnAdjuster[][3];
 void pot_loop();
 void Traffic_System(int* first, int* second);
+bool button_state_0 = false;
+bool button_state_1 = false;
+bool button_state_2 = false;
+bool button_state_3 = false;
+bool button_state_4 = false;
 #endif // VARIABLES_H

@@ -7,12 +7,12 @@
 
 #include "variables.h"
 
-typedef enum {
+typedef enum LightStates {
   Red,
   RedYellow,
   Green,
   Yellow
-} LightStates;
+};
 
 LightStates LState;
 
@@ -55,11 +55,7 @@ byte green_led_8 = 45;
 #define button_pin_3 49
 #define button_pin_4 50
 
-bool button_state_0;
-bool button_state_1;
-bool button_state_2;
-bool button_state_3;
-bool button_state_4;
+
 
 unsigned long previousMillis = 0;
 
@@ -102,8 +98,6 @@ void setup() {
   pinMode(button_pin_3, INPUT);
   pinMode(button_pin_4, INPUT);
 
-  pinMode(LED_BUILTIN, OUTPUT);
-
   display_setup();
 }
 
@@ -115,57 +109,68 @@ void loop() {
   button_state_3 = digitalRead(button_pin_3);
   button_state_4 = digitalRead(button_pin_4);
 
-  ButtonStates[0] = button_state_0;
-  ButtonStates[1] = button_state_1;
-  ButtonStates[2] = button_state_2;
-  ButtonStates[3] = button_state_3;
-  ButtonStates[4] = button_state_4;
+  unsigned long currentMillis = millis();
 
-  if (button_state_0 || button_state_1 || button_state_2 || button_state_3 || button_state_4) {
-    digitalWrite(LED_BUILTIN, HIGH);
+
+  unsigned long millisDifference = currentMillis - previousMillis;
+
+  if (0 < millisDifference && millisDifference < 1000) {
+    LState = RedYellow;
+  }
+  else if (1000 < millisDifference && millisDifference < 6000) {
+    LState = Green;
+  }
+  else if (6000 < millisDifference && millisDifference < 8000) {
+    LState = Yellow;
+  }
+  else if (8000 < millisDifference && millisDifference < 10000) {
+    LState = Red;
+  }
+  else if (10000 < millisDifference) {
+    previousMillis = currentMillis;
   }
 
   knappar_loop();
   pot_loop();
-  // int first, second;
-  // Traffic_System(&first, &second);
-  // addToQue(first, second);
+  int first, second;
+  Traffic_System(&first, &second);
+  addToQue(first, second);
   display_loop();
-  // finalExecution_loop();
+  finalExecution_loop();
 }
 
 void LightState(int t_light) {
+
   switch (t_light) {
     case 0:
-      updateState(LState, red_led_1, yellow_led_1, green_led_1, previousMillis);
+      updateState(red_led_1, yellow_led_1, green_led_1, previousMillis);
       break;
     case 1:
-      updateState(LState, red_led_2, yellow_led_2, green_led_2, previousMillis);
+      updateState(red_led_2, yellow_led_2, green_led_2, previousMillis);
       break;
     case 2:
-      updateState(LState, red_led_3, yellow_led_3, green_led_3, previousMillis);
+      updateState(red_led_3, yellow_led_3, green_led_3, previousMillis);
       break;
     case 3:
-      updateState(LState, red_led_4, yellow_led_4, green_led_4, previousMillis);
+      updateState(red_led_4, yellow_led_4, green_led_4, previousMillis);
       break;
     case 4:
-      updateState(LState, red_led_5, yellow_led_5, green_led_5, previousMillis);
+      updateState(red_led_5, yellow_led_5, green_led_5, previousMillis);
       break;
     case 5:
-      updateState(LState, red_led_6, yellow_led_6, green_led_6, previousMillis);
+      updateState(red_led_6, yellow_led_6, green_led_6, previousMillis);
       break;
     case 6:
-      updateState(LState, red_led_7, yellow_led_7, green_led_7, previousMillis);
+      updateState(red_led_7, yellow_led_7, green_led_7, previousMillis);
       break;
     case 7:
-      updateState(LState, red_led_8, yellow_led_8, green_led_8, previousMillis);
+      updateState(red_led_8, yellow_led_8, green_led_8, previousMillis);
       break;
   }
 }
 
-void updateState(LightStates &LState, int red_pin, int yellow_pin, int green_pin, unsigned long &previousMillis) {
-  unsigned long currentMillis = millis();
-
+void updateState(int red_pin, int yellow_pin, int green_pin, unsigned long &previousMillis) {
+  
   switch (LState) {
     case Red:
       digitalWrite(red_pin, HIGH);
@@ -176,28 +181,28 @@ void updateState(LightStates &LState, int red_pin, int yellow_pin, int green_pin
       digitalWrite(red_pin, HIGH);
       digitalWrite(yellow_pin, HIGH);
       digitalWrite(green_pin, LOW);
-      if (currentMillis - previousMillis >= 2000) {
-        LState = Green;
-        previousMillis = currentMillis;
-      }
+      // if (currentMillis - previousMillis >= 2000) {
+      //   LState = Green;
+      //   previousMillis = currentMillis;
+      // }
       break;
     case Green:
       digitalWrite(red_pin, LOW);
       digitalWrite(yellow_pin, LOW);
       digitalWrite(green_pin, HIGH);
-      if (currentMillis - previousMillis >= 4000) {
-        LState = Yellow;
-        previousMillis = currentMillis;
-      }
+      // if (currentMillis - previousMillis >= 4000) {
+      //   LState = Yellow;
+      //   previousMillis = currentMillis;
+      // }
       break;
     case Yellow:
       digitalWrite(red_pin, LOW);
       digitalWrite(yellow_pin, HIGH);
       digitalWrite(green_pin, LOW);
-      if (currentMillis - previousMillis >= 1000) {
-        LState = Red;
-        previousMillis = currentMillis;
-      }
+      // if (currentMillis - previousMillis >= 1000) {
+      //   LState = Red;
+      //   previousMillis = currentMillis;
+      // }
       break;
   }
 }

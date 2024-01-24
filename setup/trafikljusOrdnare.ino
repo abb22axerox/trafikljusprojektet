@@ -8,7 +8,7 @@ void addToQue(int firstLight, int secondLight)
   int* newInstructions; // definiera de nya instruktionerna
   int** newArray = new int*[waitingLightsLength + 1];
 
-  for (int i = 0; i < waitingLightsLength; ++i) {
+  for (int i = 0; i < waitingLightsLength; i++) {
     newArray[i] = WaitingLights[i]; // lägg till alla element från WaitingLights till newArray
   }
   newInstructions = new int[2];
@@ -16,7 +16,7 @@ void addToQue(int firstLight, int secondLight)
   newInstructions[0] = firstLight;
   
   newArray[waitingLightsLength] = newInstructions; // lägg till det nya elementet
-
+  
   delete[] WaitingLights; // rensa minnet
   WaitingLights = newArray; // uppdatera minnespekaren till att visa till newArray
 

@@ -9,10 +9,16 @@
 
 void knappar_loop() {
   int StatesLength = 5; // Längden av ButtonStates
-  Walk = ButtonStates[StatesLength - 1]; // Walk är längden-1 vilket ger det sista elementet alltså index 4
-  for (int i = 0; i < StatesLength - 1; i++) {
-    if (ButtonStates[i]) {
-      Btn = i;
-    }
+  Walk = button_state_4; // Walk är längden-1 vilket ger det sista elementet alltså index 4
+  if(button_state_0){
+    Btn = 0;
+  } else if(button_state_1){
+    Btn = 1;
+  } else if(button_state_2){
+    Btn = 2;
+  } else if(button_state_3){
+    Btn = 3;
+  }
+  if (Walk) {
   }
 }

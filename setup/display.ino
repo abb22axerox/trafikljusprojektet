@@ -28,10 +28,7 @@ void display_setup() {
   display.println(F("Waiting for input..."));
 
   // Display station number in the upper left corner
-  display.setTextSize(1);
-  display.setCursor(0, 0);
-  display.print(F("Station: "));
-  display.print(Btn);
+  update_station();
 
   display.display();
 }
@@ -39,7 +36,7 @@ void display_setup() {
 void update_station() {
   display.setTextSize(1);
   display.setCursor(0, 0);
-  display.print(F("Station: "));
+  display.print(F("Infart: "));
   display.print(Btn);
 }
 
