@@ -4,12 +4,16 @@
 #include "variables.h"
 
 void addToQue(int firstLight, int secondLight) {
-  StartLightCycle(firstLight, millis());
-  if (secondLight > 0) {
-    StartLightCycle(secondLight, millis());
-    // Serial.println(secondLight);
+  if (prevBtn != Btn) {
+    Serial.println(firstLight);
+    StartLightCycle(firstLight, millis());
+    prevBtn = Btn;
   }
-  // Serial.println(firstLight);
+  // if (secondLight > 0 && secondLight < 8) {
+  //   StartLightCycle(secondLight, millis());
+  //   Serial.print("secondLight:");
+  //   Serial.println(secondLight);
+  // }
   // int* newInstructions; // definiera de nya instruktionerna
   // int** newArray = new int*[waitingLightsLength + 1];
 

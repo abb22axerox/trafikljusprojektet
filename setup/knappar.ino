@@ -19,6 +19,4 @@ void knappar_loop() {
   } else if(button_state_3){
     Btn = 3;
   }
-  if (Walk) {
-  }
 }
