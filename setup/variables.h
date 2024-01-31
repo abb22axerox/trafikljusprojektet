@@ -2,11 +2,12 @@
 #define VARIABLES_H
 
 int Btn = 0;
+int prevBtn = 0; // flagga för Btn, undvika att köra koden flera gånger
 bool Walk;
 void knappar_loop();
 void finalExecution_loop();
 int Turn;
-void LightState();
+void StartLightCycle();
 void display_setup();
 void display_loop();
 int waitingLightsLength = 0;

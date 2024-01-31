@@ -7,89 +7,46 @@
 
 #include "variables.h"
 
-typedef enum LightStates {
-  Red,
-  RedYellow,
-  Green,
-  Yellow
-};
-
-LightStates LState;
-
-//Trafficlights
-byte red_led_1 = 22;
-byte yellow_led_1 = 23;
-byte green_led_1 = 24;
-
-byte red_led_2 = 25;
-byte yellow_led_2 = 26;
-byte green_led_2 = 27;
-
-byte red_led_3 = 28;
-byte yellow_led_3 = 29;
-byte green_led_3 = 30;
-
-byte red_led_4 = 31;
-byte yellow_led_4 = 32;
-byte green_led_4 = 33;
-
-byte red_led_5 = 34;
-byte yellow_led_5 = 35;
-byte green_led_5 = 36;
-
-byte red_led_6 = 37;
-byte yellow_led_6 = 38;
-byte green_led_6 = 39;
-
-byte red_led_7 = 40;
-byte yellow_led_7 = 41;
-byte green_led_7 = 42;
-
-byte red_led_8 = 43;
-byte yellow_led_8 = 44;
-byte green_led_8 = 45;
-
 #define button_pin_0 46
 #define button_pin_1 47
 #define button_pin_2 48
 #define button_pin_3 49
 #define button_pin_4 50
 
+struct light_data_struct {
+  byte red_pin;
+  byte yellow_pin;
+  byte green_pin;
 
+  unsigned long start_millis;
+  // int index_key;
+};
 
-unsigned long previousMillis = 0;
+light_data_struct light_data[8];
+int light_data_length = 8;
+
+//                                     r     ry    g     y
+unsigned long light_cycle_timings[] = {1000, 2000, 4000, 2000};
+int light_cycles_length = 4;
 
 void setup() {
-  // put your setup code here, to run once:
-  //Trafikljus pinModes
-  pinMode(red_led_1, OUTPUT);
-  pinMode(yellow_led_1, OUTPUT);
-  pinMode(green_led_1, OUTPUT);
-  pinMode(red_led_2, OUTPUT);
-  pinMode(yellow_led_2, OUTPUT);
-  pinMode(green_led_2, OUTPUT);
-  pinMode(red_led_3, OUTPUT);
-  pinMode(yellow_led_3, OUTPUT);
-  pinMode(green_led_3, OUTPUT);
-  pinMode(red_led_4, OUTPUT);
-  pinMode(yellow_led_4, OUTPUT);
-  pinMode(green_led_4, OUTPUT);
-  pinMode(red_led_5, OUTPUT);
-  pinMode(yellow_led_5, OUTPUT);
-  pinMode(green_led_5, OUTPUT);
-  pinMode(red_led_6, OUTPUT);
-  pinMode(yellow_led_6, OUTPUT);
-  pinMode(green_led_6, OUTPUT);
-  pinMode(red_led_7, OUTPUT);
-  pinMode(yellow_led_7, OUTPUT);
-  pinMode(green_led_7, OUTPUT);
-  pinMode(red_led_8, OUTPUT);
-  pinMode(yellow_led_8, OUTPUT);
-  pinMode(green_led_8, OUTPUT);
 
-  LState = Red;
+  // Set light_data pins
+  //              r   y   g
+  light_data[0] = {22, 23, 24};
+  light_data[1] = {25, 26, 27};
+  light_data[2] = {28, 29, 30};
+  light_data[3] = {31, 32, 33};
+  light_data[4] = {34, 35, 36};
+  light_data[5] = {37, 38, 39};
+  light_data[6] = {40, 41, 42};
+  light_data[7] = {43, 44, 45};
 
-  Serial.begin(9600);
+  for (int i = 0; i < light_data_length; i++) {
+    pinMode(light_data[i].red_pin, OUTPUT);
+    pinMode(light_data[i].yellow_pin, OUTPUT);
+    pinMode(light_data[i].green_pin, OUTPUT);
+  }
 
   //Knapparnas pinModes
   pinMode(button_pin_0, INPUT);
@@ -97,6 +54,8 @@ void setup() {
   pinMode(button_pin_2, INPUT);
   pinMode(button_pin_3, INPUT);
   pinMode(button_pin_4, INPUT);
+
+  Serial.begin(9600);
 
   display_setup();
 }
@@ -109,26 +68,8 @@ void loop() {
   button_state_3 = digitalRead(button_pin_3);
   button_state_4 = digitalRead(button_pin_4);
 
-  unsigned long currentMillis = millis();
-
-
-  unsigned long millisDifference = currentMillis - previousMillis;
-
-  if (0 < millisDifference && millisDifference < 1000) {
-    LState = RedYellow;
-  }
-  else if (1000 < millisDifference && millisDifference < 6000) {
-    LState = Green;
-  }
-  else if (6000 < millisDifference && millisDifference < 8000) {
-    LState = Yellow;
-  }
-  else if (8000 < millisDifference && millisDifference < 10000) {
-    LState = Red;
-  }
-  else if (10000 < millisDifference) {
-    previousMillis = currentMillis;
-  }
+  unsigned long current_millis = millis();
+  UpdateLightStates(current_millis);
 
   knappar_loop();
   pot_loop();
@@ -136,73 +77,68 @@ void loop() {
   Traffic_System(&first, &second);
   addToQue(first, second);
   display_loop();
-  finalExecution_loop();
+  // finalExecution_loop();
 }
 
-void LightState(int t_light) {
+int GetLightStateKey(unsigned long start_millis, unsigned long current_millis)
+{
+  unsigned long tot_millis = start_millis;
+  for (int i = 0; i < light_cycles_length; i++)
+  {
+    tot_millis += light_cycle_timings[i];
 
-  switch (t_light) {
-    case 0:
-      updateState(red_led_1, yellow_led_1, green_led_1, previousMillis);
-      break;
-    case 1:
-      updateState(red_led_2, yellow_led_2, green_led_2, previousMillis);
-      break;
-    case 2:
-      updateState(red_led_3, yellow_led_3, green_led_3, previousMillis);
-      break;
-    case 3:
-      updateState(red_led_4, yellow_led_4, green_led_4, previousMillis);
-      break;
-    case 4:
-      updateState(red_led_5, yellow_led_5, green_led_5, previousMillis);
-      break;
-    case 5:
-      updateState(red_led_6, yellow_led_6, green_led_6, previousMillis);
-      break;
-    case 6:
-      updateState(red_led_7, yellow_led_7, green_led_7, previousMillis);
-      break;
-    case 7:
-      updateState(red_led_8, yellow_led_8, green_led_8, previousMillis);
-      break;
+    if (current_millis < tot_millis)
+    {
+      return i;
+    }
   }
+  // Default light state: RED (0)
+  return 0;
 }
 
-void updateState(int red_pin, int yellow_pin, int green_pin, unsigned long &previousMillis) {
-  
-  switch (LState) {
-    case Red:
+void SetLightState(int light_state_key, int light_index)
+{
+  light_data_struct ld = light_data[light_index];
+  byte red_pin = ld.red_pin, yellow_pin = ld.yellow_pin, green_pin = ld.green_pin;
+
+  switch (light_state_key) {
+    case 0: // Red
       digitalWrite(red_pin, HIGH);
       digitalWrite(yellow_pin, LOW);
       digitalWrite(green_pin, LOW);
       break;
-    case RedYellow:
+    case 1: // RedYellow
       digitalWrite(red_pin, HIGH);
       digitalWrite(yellow_pin, HIGH);
       digitalWrite(green_pin, LOW);
-      // if (currentMillis - previousMillis >= 2000) {
-      //   LState = Green;
-      //   previousMillis = currentMillis;
-      // }
       break;
-    case Green:
+    case 2: // Green
       digitalWrite(red_pin, LOW);
       digitalWrite(yellow_pin, LOW);
       digitalWrite(green_pin, HIGH);
-      // if (currentMillis - previousMillis >= 4000) {
-      //   LState = Yellow;
-      //   previousMillis = currentMillis;
-      // }
       break;
-    case Yellow:
+    case 3: // Yellow
       digitalWrite(red_pin, LOW);
       digitalWrite(yellow_pin, HIGH);
       digitalWrite(green_pin, LOW);
-      // if (currentMillis - previousMillis >= 1000) {
-      //   LState = Red;
-      //   previousMillis = currentMillis;
-      // }
       break;
+    default:
+      Serial.println("ERR - light_state_key invalid");
   }
+}
+
+void UpdateLightStates(unsigned long current_millis)
+{
+  for (int light_index = 0; light_index < light_data_length; light_index++)
+  {
+    unsigned long start_millis = light_data[light_index].start_millis;
+    int light_state_key = GetLightStateKey(start_millis, current_millis);
+
+    SetLightState(light_state_key, light_index);
+  }
+}
+
+void StartLightCycle(int lightIndex, unsigned long new_start_millis)
+{
+  light_data[lightIndex].start_millis = new_start_millis;
 }

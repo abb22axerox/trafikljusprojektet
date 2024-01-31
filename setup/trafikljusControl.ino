@@ -15,18 +15,22 @@ using namespace std;
 // int Light_instructions[2];  // Ljusinstruktioner: [2, 4]
 
 void Traffic_System(int* first, int* second) {
-  if (Walk) {
-    *first = Btn + 3;
-    *second = -1;
-    //        cout << "Walk: Light_instructions sent if:0" << endl;
-  } else {
-    if (Turn >= 0 && Turn <= 2) {
-      *first = Btn;
-      *second = TurnAdjuster[Btn][Turn];  // Justera för att Btn är inom intervallet 1-4
-                                          // cout << "Car: Light_instructions sent id:" << Btn << endl;
+  if (prevBtn != Btn) { // Väldigt viktig if, gör så att den tidigare tryckta knappen inte skickar samma index till funktionen
+    if (Walk) {
+      *first = Btn + 3;
+      *second = -1;
+      //        cout << "Walk: Light_instructions sent if:0" << endl;
     } else {
-      // cout << "Insufficient turn" << endl;
+      if (Turn >= 0 && Turn <= 2) {
+        *first = Btn;
+        *second = TurnAdjuster[Btn][Turn];  // Justera för att Btn är inom intervallet 1-4
+        Serial.print("Car: Light_instructions sent id:");
+        Serial.println(Btn);
+      } else {
+        // cout << "Insufficient turn" << endl;
+      }
     }
+    prevBtn = Btn;
   }
 }
 
