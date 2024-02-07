@@ -9,9 +9,10 @@ unsigned long difference_in_millis = 0;
 void addToQue(int firstLight, int secondLight) {
   if (prevBtn != Btn) {
     lastActivationMillis = millis();
+    Serial.print("firstLight:");
     Serial.println(firstLight);
     StartLightCycle(firstLight, lastActivationMillis);
-    if (secondLight > 0 && secondLight < 8) {
+    if (secondLight >= 0 && secondLight < 8) {
       StartLightCycle(secondLight, lastActivationMillis);
       Serial.print("secondLight:");
       Serial.println(secondLight);
