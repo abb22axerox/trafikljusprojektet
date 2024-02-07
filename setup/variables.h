@@ -3,6 +3,7 @@
 
 int Btn = 0;
 int prevBtn = 0; // flagga för Btn, undvika att köra koden flera gånger
+int displayBtn = 0; // flagga för display
 bool Walk;
 void knappar_loop();
 void finalExecution_loop();

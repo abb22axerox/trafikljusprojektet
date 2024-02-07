@@ -37,7 +37,12 @@ void update_station() {
   display.setTextSize(1);
   display.setCursor(0, 0);
   display.print(F("Infart: "));
-  display.print(Btn);
+  if(Btn != -1){
+    display.print(Btn);
+    displayBtn = Btn;
+  } else {
+    display.print(displayBtn);
+  }
 }
 
 void update_direction(int text_size_x, int text_size_y, int cursor_x, int cursor_y, String direction) {
